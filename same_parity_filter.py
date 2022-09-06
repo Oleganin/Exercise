@@ -1,5 +1,5 @@
 def same_parity_filter(args):
-    return list(filter(lambda x: not x % args[0], args))
+    return list(filter(lambda x: x%2 == args[0]%2, args))
 
 if __name__ == '__main__':
     print(same_parity_filter([]))
