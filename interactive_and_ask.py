@@ -6,7 +6,10 @@ def interactive(text):
         @wraps(function)
         def inner():
             print(function.__doc__)
-            return function(**function.__annotations__)
+            tmp = {}
+            for el in function.__code__.co_varnames:
+                tmp.setdefault(el, input(function.__annotations__[el]))
+            return function(**tmp)
         return inner
     return wrapped
 
@@ -14,8 +17,7 @@ def ask(arg, text):
     def wrapped(func):
         @wraps(func)
         def inner():
-            tmp = input(text)
-            func.__annotations__.setdefault(arg, tmp)
+            func.__annotations__.setdefault(arg, text)
             return func
         return inner()
     return wrapped
@@ -27,3 +29,5 @@ if __name__ == '__main__':
     @ask('y', 'Enter second number: ')
     def calc(x,y):
         return int(x) + int(y)
+
+    print(calc())
