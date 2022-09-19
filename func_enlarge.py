@@ -1,10 +1,10 @@
-def enlarge(*args):
-    arg = curry(map)(iter)(args)
+def enlarge(args):
     m_d = curry(map)(dup)
     l_m_d = compose(''.join)(m_d)
-    res = pair(curry(map)(l_m_d)(arg))
-    
-    return res
+    arg = curry(map)(l_m_d)(args)
+    j_p = compose('\n'.join)(pair)
+    m_j_p = curry(map)(j_p)(arg)
+    return '\n'.join(m_j_p)
 
 
 def compose(fn1):
@@ -33,4 +33,4 @@ if __name__ == '__main__':
 
      display(glider)
      print('-'*10)
-     display(enlarge(glider))
+     print(enlarge(glider))
