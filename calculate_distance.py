@@ -1,5 +1,7 @@
 def calculate_distance(first, second):
-    distance = (second[0]-first[0])**2+(second[1]-first[1])**2
+    x1, y1 = first
+    x2,y2 = second
+    distance = (x2-x1)**2+(y2-y1)**2
     return distance**0.5
 
 
