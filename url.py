@@ -4,25 +4,27 @@ def make(url):
     return urllib.parse.urlparse(url)
 
 def get_scheme(data):
-    pass
+    return data.scheme
 
-def set_schem(data, scheme):
-    pass
+def set_scheme(data, scheme):
+    return make(data._replace(scheme=scheme))
 
 def get_host(data):
-    pass
+    return data.hostname
 
 def set_host(data, host):
     pass
 
 def get_path(data):
-    pass
+    return data.path
 
 def set_path(data, path):
     pass
 
-def get_query_rapam(dat, param_name, default = None):
-    pass
+def get_query_param(data, param_name, default = None):
+    if not data.query:
+        return default
+    return urllib.parse.parse_qs(data.query)[param_name]
 
 def set_query_param(data, key, value):
     pass
@@ -34,7 +36,7 @@ if __name__ == '__main__':
     u = make('https://hexlet.io/community?q=low')
     u = set_scheme(u, 'http')
     print(to_string(u))
-    print(get_query_aram(u, 'q'))
+    print(get_query_param(u, 'q'))
     u = set_query_param(u, 'page', 5)
     print(to_string(u))
     u = set_query_param(u, 'q', 'high')
