@@ -7,19 +7,22 @@ def get_scheme(data):
     return data.scheme
 
 def set_scheme(data, scheme):
-    return make(data._replace(scheme=scheme))
+    new_url = to_string(data._replace(scheme=scheme))
+    return make(new_url)
 
 def get_host(data):
     return data.hostname
 
 def set_host(data, host):
-    pass
+    new_url = to_string(data._replace(netloc=host))
+    return make(new_url)
 
 def get_path(data):
     return data.path
 
 def set_path(data, path):
-    pass
+    new_url = to_string(data._replace(path=path))
+    return make(new_url)
 
 def get_query_param(data, param_name, default = None):
     if not data.query:
@@ -37,9 +40,9 @@ if __name__ == '__main__':
     u = set_scheme(u, 'http')
     print(to_string(u))
     print(get_query_param(u, 'q'))
-    u = set_query_param(u, 'page', 5)
+    '''u = set_query_param(u, 'page', 5)
     print(to_string(u))
     u = set_query_param(u, 'q', 'high')
     print(to_string(u))
     u = set_query_param(u, 'q', None)
-    print(to_string(u))
+    print(to_string(u))'''
