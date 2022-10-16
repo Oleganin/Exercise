@@ -13,15 +13,15 @@ def compress_image(node, scale = 2):
     if fs.is_file(node):
         if is_jpg(node):
             new_meta = copy_meta(fs.get_meta(node))
-            new_meta['size'] = new_meta['size']/scale
+            new_meta['size'] = int(new_meta['size']/scale)
             return fs.mkfile(fs.get_name(node), new_meta)
         else:
             return node
 
 
-def compress_images(tree):
+def compress_images(tree, scale = 2):
     children = fs.get_children(tree)
-    new_children = list(map(compress_image, children))
+    new_children = list(map(lambda child: compress_image(child, scale), children))
     new_meta = copy_meta(fs.get_meta(tree))
     return fs.mkdir(fs.get_name(tree), new_children, new_meta)
 
